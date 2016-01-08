@@ -1,4 +1,4 @@
-Spree Iugu BankSlip
+Spree Iugu BankSlip [![Build Status](https://travis-ci.org/zaeznet/spree_iugu_bank_slip.svg?branch=master)](https://travis-ci.org/zaeznet/spree_iugu_bank_slip)
 =================
 
 Add to Spree Commerce the payment by [Iugu](http://c.iugu.com/) Bank Slip.

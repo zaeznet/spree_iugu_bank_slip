@@ -1,0 +1,8 @@
+<!-- replace "erb[silent]:contains('else')" -->
+<% elsif source.is_a?(Spree::BankSlip) %>
+  <label><%= Spree.t(:payment_method_bank_slip) %></label><br />
+  <% if source.payment_due? %>
+    <span><%= "#{Spree.t(:payment_due)}: #{ l source.payment_due }" %></span><br />
+  <% end %>
+  <%= link_to Spree.t(:generate_bank_slip), bank_slip_path(source.id), target: '_blank', class: 'btn btn-sm btn-info' if source.pending? %>
+<% else %>

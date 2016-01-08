@@ -1,0 +1,39 @@
+<fieldset data-hook="billet">
+  <legend>
+    <%= Spree.t(:bank_slip_title) %>
+  </legend>
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <th><%= Spree.t(:invoice_id) %>:</th>
+      <td><%= payment.source.invoice_id %>
+    </tr>
+    <tr>
+      <th><%= Spree.t(:amount) %>:</th>
+      <td><%= payment.source.display_amount.to_html %>
+    </tr>
+    <tr>
+      <th><%= Spree.t(:payment_due) %>:</th>
+      <td><%= l payment.source.payment_due if payment.source.payment_due? %>
+    </tr>
+    <% if payment.source.paid? %>
+        <tr>
+          <th><%= Spree.t(:paid_in) %>:</th>
+          <td><%= payment.source.paid_in.strftime(t('date.formats.default')) rescue '' %>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= Spree.t(:status) %>:</th>
+      <td>
+        <label class="label label-<%= payment.source.status %>"><%= Spree.t(payment.source.status) %></label>
+      </td>
+    </tr>
+    <% if payment.source.pending? %>
+        <tr>
+          <td colspan="2">
+            <%= link_to Spree.t(:generate_bank_slip), bank_slip_path(payment.source_id),
+                        target: '_blank', class: 'btn btn-sm btn-info pull-right' %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</fieldset>

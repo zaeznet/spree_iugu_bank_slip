@@ -1,0 +1,27 @@
+en:
+  bank_slip_settings: Iugu Bank Slip Settings
+  activerecord:
+    models:
+      spree/bank_slip:
+        one: Bank Slip
+        other: Bank Slips
+  spree:
+    bank_slip_settings: Iugu Bank Slip Settings
+    bank_slip_title: Bank Slip
+    iugu_api_token: API Token
+    doc_customer_attr: Doc. Customer Attribute
+    shipment_total: Shipment Total
+    payment_method_bank_slip: Bank Slip
+    payment_due: Due Date
+    paid_in: Paid In
+    invoice_id: Invoice ID
+    generate_bank_slip: Generate Billet
+    bank_slip:
+      messages:
+        iugu_fail: Request to Iugu fail!
+        source_fail: Source could not be saved!
+        successfully_authorized: Payment successfully authorized!
+        successfully_captured: Payment successfully captured!
+        capture_fail: The capture fail!
+        successfully_voided: Payment successfully voided!
+        void_fail: The void fail!

@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "url": "http://localhost:3000",
+  "pdf": "http://localhost:3000.pdf",
+  "invoice_id": "1",
+  "identification": "000"
+}

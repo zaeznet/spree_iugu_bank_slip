@@ -1,0 +1,27 @@
+pt-BR:
+  bank_slip_settings: "Configuração Boleto Iugu"
+  activerecord:
+    models:
+      spree/bank_slip:
+        one: Iugu Boleto
+        other: Iugu Boleto
+  spree:
+    bank_slip_settings: "Configuração Boleto Iugu"
+    bank_slip_title: Boleto Iugu
+    iugu_api_token: Token API
+    doc_customer_attr: Atributo que Rep. o Documento do Cliente
+    shipment_total: Valor do frete
+    payment_method_bank_slip: Boleto
+    payment_due: Data de Vencimento
+    paid_in: Pago Em
+    invoice_id: "Número Boleto"
+    generate_bank_slip: Gerar boleto
+    bank_slip:
+      messages:
+        iugu_fail: "Requisição falhou!"
+        source_fail: "Pagamento não pode ser salvo!"
+        successfully_authorized: Pagamento autorizado com sucesso!
+        successfully_captured: Pagamento capturado com sucesso!
+        capture_fail: A captura falhou!
+        successfully_voided: Pagamento cancelado com sucesso!
+        void_fail: O cancelamento falhou!

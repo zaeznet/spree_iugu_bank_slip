@@ -1,0 +1,131 @@
+{
+  "id": "1",
+  "due_date": "2016-01-09",
+  "currency": "BRL",
+  "discount_cents": null,
+  "email": "spree@example.com",
+  "items_total_cents": 1000,
+  "notification_url": null,
+  "return_url": null,
+  "status": "pending",
+  "tax_cents": null,
+  "updated_at": "2016-01-06T13:24:21-02:00",
+  "total_cents": 1000,
+  "total_paid_cents": 0,
+  "paid_at": null,
+  "taxes_paid_cents": null,
+  "paid_cents": null,
+  "cc_emails": null,
+  "financial_return_date": null,
+  "payable_with": "all",
+  "overpaid_cents": null,
+  "ignore_due_email": true,
+  "ignore_canceled_email": true,
+  "advance_fee_cents": null,
+  "secure_id": "1",
+  "secure_url": "http://localhost:3000",
+  "customer_id": null,
+  "customer_ref": null,
+  "customer_name": null,
+  "user_id": null,
+  "total": "R$ 10,00",
+  "taxes_paid": "R$ 0,00",
+  "total_paid": "R$ 0,00",
+  "total_overpaid": "R$ 0,00",
+  "fines_on_occurrence_day": null,
+  "total_on_occurrence_day": null,
+  "fines_on_occurrence_day_cents": null,
+  "total_on_occurrence_day_cents": null,
+  "advance_fee": null,
+  "paid": "R$ 0,00",
+  "interest": null,
+  "discount": null,
+  "created_at": "06/01, 13:24 h",
+  "refundable": null,
+  "installments": null,
+  "transaction_number": 1111,
+  "payment_method": null,
+  "created_at_iso": "2016-01-06T13:24:20-02:00",
+  "updated_at_iso": "2016-01-06T13:24:21-02:00",
+  "financial_return_dates": null,
+  "bank_slip": {
+    "digitable_line": "00000000000000000000000000000000000000000000000",
+    "barcode_data": "00000000000000000000000000000000000000000000",
+    "barcode": "http://localhost:3000"
+  },
+  "items": [
+    {
+      "id": "34F9D7F67E5244EF99796936CF208E35",
+      "description": "Item Um",
+      "price_cents": 1000,
+      "quantity": 1,
+      "created_at": "2016-01-06T13:24:20-02:00",
+      "updated_at": "2016-01-06T13:24:20-02:00",
+      "price": "R$ 10,00"
+    }
+  ],
+  "variables": [
+    {
+      "id": "06B21226727C4121AC4BDB524DC0DA45",
+      "variable": "payer.address.country",
+      "value": "Brasil"
+    },
+    {
+      "id": "1D6D9BAA1D4E44F8A428B409371BF12F",
+      "variable": "payer.address.zip_code",
+      "value":"12122-00"
+    },
+    {
+      "id": "2D26D1E24B1240D1A42EF4826AF758E7",
+      "variable": "payer.phone",
+      "value": "12121212"
+    },
+    {
+      "id": "34B880D1A6EA4A8F81583B8093AFC548",
+      "variable": "payer.phone_prefix",
+      "value": "11"
+    },
+    {
+      "id": "5242B104C9F942A6A2891EB17B6AD3B1",
+      "variable": "payer.name",
+      "value": "Nome do Cliente"
+    },
+    {
+      "id": "605E45FCC8444E22A28BF38A2409582B",
+      "variable": "payer.address.number",
+      "value": "700"
+    },
+    {
+      "id": "726310D0E206478E8F5609813C35387B",
+      "variable": "payment_data.transaction_number",
+      "value": "1111"
+    },
+    {
+      "id": "9DEA3D530F12427896818A60BABF753A",
+      "variable": "payer.address.street",
+      "value": "Rua Tal"
+    },
+    {
+      "id": "A4BD3C27296C440A8EC7F983F75132D8",
+      "variable": "payer.cpf_cnpj",
+      "value": "12312312312"
+    },
+    {
+      "id": "E66AF99801BA4071ABBD80FDA6A1B534",
+      "variable": "payer.address.city",
+      "value": "São Paulo"
+    },
+    {
+      "id": "E9197DB3A6A74B9BBA4BCDF2E9553774",
+      "variable": "payer.email",
+      "value": "spree@example.com"
+    },
+    {
+      "id": "F2711AED42874D61ACC2D893EAAA43E0",
+      "variable": "payer.address.state",
+      "value": "SP"
+    }
+  ],
+  "custom_variables": [],
+  "logs": []
+}

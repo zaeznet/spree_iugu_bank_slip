@@ -1,0 +1,34 @@
+<%= render :partial => 'spree/admin/shared/sub_menu/configuration' %>
+
+<% content_for :page_title do %>
+    <%= Spree.t(:bank_slip_settings) %>
+<% end %>
+
+<%= form_tag admin_bank_slip_settings_path, :method => :put  do |form| %>
+    <div id="billet_preferences" data-hook="billet_preferences">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            <%= Spree.t(:settings) %>
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <%= label_tag(:iugu_api_token, Spree.t(:iugu_api_token) + ': ') + tag(:br) %>
+              <%= text_field_tag :iugu_api_token, @config.iugu_api_token, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <%= label_tag(:doc_customer_attr, Spree.t(:doc_customer_attr) + ': ') + tag(:br) %>
+              <%= select_tag :doc_customer_attr,
+                             options_for_select(@user_attr.collect { |item| [Spree.t(item), item] }, @config.doc_customer_attr),
+                             class: 'select2', include_blank: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'spree/admin/shared/edit_resource_links', locals: { collection_url: edit_admin_bank_slip_settings_url } %>
+<% end %>

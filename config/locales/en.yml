@@ -9,6 +9,8 @@ en:
     bank_slip_settings: Iugu Bank Slip Settings
     bank_slip_title: Bank Slip
     iugu_api_token: API Token
+    days_to_due_date: Days to Due Date
+    ignore_due_email: Ignore Due Email
     doc_customer_attr: Doc. Customer Attribute
     shipment_total: Shipment Total
     payment_method_bank_slip: Bank Slip

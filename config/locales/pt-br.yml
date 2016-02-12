@@ -9,6 +9,8 @@ pt-BR:
     bank_slip_settings: "Configuração Boleto Iugu"
     bank_slip_title: Boleto Iugu
     iugu_api_token: Token API
+    days_to_due_date: Dias para o Vencimento
+    ignore_due_email: "Ignorar Email de Cobrança"
     doc_customer_attr: Atributo que Rep. o Documento do Cliente
     shipment_total: Valor do frete
     payment_method_bank_slip: Boleto

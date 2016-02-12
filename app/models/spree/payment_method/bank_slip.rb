@@ -27,6 +27,7 @@ module Spree
       #
       def authorize(amount, source, *args)
         gateway_options = args.first
+        user = Spree::User.find gateway_options[:customer_id]
         doc_user = user.attributes[Spree::BankSlipConfig[:doc_customer_attr]] rescue ''
         billing_address = gateway_options[:billing_address]
 
@@ -39,9 +40,17 @@ module Spree
           phone = billing_address[:phone]
         end
 
+        notification_url = Spree::Store.current.url
+        notification_url << Spree::Core::Engine.routes.url_helpers.bank_slip_status_changed_path(source.id)
+
+        due_date = Date.today + Spree::BankSlipConfig[:days_to_due_date].days
+
         iugu_params = {
             method: 'bank_slip',
             email: gateway_options[:email],
+            notification_url: notification_url,
+            due_date: due_date.strftime('%d/%m/%Y'),
+            ignore_due_email: Spree::BankSlipConfig[:ignore_due_email],
             items: [],
             payer: {
                 cpf_cnpj: doc_user,
@@ -85,26 +94,26 @@ module Spree
           }
         end
 
-        response = Iugu::Charge.create(iugu_params)
-        invoice_id = response.attributes['invoice_id']
+        response = Iugu::Invoice.create(iugu_params)
 
-        if response.attributes['success']
+        if response.attributes['errors']
+          ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.iugu_fail'), {}, {})
+        else
+          invoice_id = response.attributes['id']
           invoice = Iugu::Invoice.fetch(invoice_id)
 
           # Se a fatura for criada, salva as informacoes no objeto BankSlip
           source.amount = amount.to_d / 100
           source.invoice_id = invoice_id
           source.payment_due = invoice.attributes['due_date']
-          source.url = response.attributes['url']
-          source.pdf = response.attributes['pdf']
+          source.url = invoice.attributes['secure_url']
+          source.pdf = "#{invoice.attributes['secure_url']}.pdf"
 
           if source.save
             ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_authorized'), {}, authorization: invoice_id)
           else
             ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.source_fail'), {}, authorization: invoice_id)
           end
-        else
-          ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.iugu_fail'), {}, authorization: invoice_id)
         end
 
       end

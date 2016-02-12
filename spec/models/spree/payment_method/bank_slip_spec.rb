@@ -6,11 +6,13 @@ describe Spree::PaymentMethod::BankSlip, type: :model do
   let(:slip) { create(:bank_slip) }
 
   before do
+    Iugu.api_key = ''
+
     create_response = JSON.parse File.read('spec/fixtures/iugu_responses/create.json')
     fetch_response = JSON.parse File.read('spec/fixtures/iugu_responses/fetch.json')
 
     # Stub da criacao da fatura
-    stub_request(:post, 'https://api.iugu.com/v1/charge').
+    stub_request(:post, 'https://api.iugu.com/v1/invoices').
         with(headers: {'Accept'=>'application/json',
                        'Accept-Charset'=>'utf-8',
                        'Accept-Encoding'=>'gzip, deflate',

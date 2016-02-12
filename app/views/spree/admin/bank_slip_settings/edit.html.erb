@@ -4,7 +4,7 @@
     <%= Spree.t(:bank_slip_settings) %>
 <% end %>
 
-<%= form_tag admin_bank_slip_settings_path, :method => :put  do |form| %>
+<%= form_tag admin_bank_slip_settings_path, method: :put  do |form| %>
     <div id="billet_preferences" data-hook="billet_preferences">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -14,9 +14,20 @@
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-4">
               <%= label_tag(:iugu_api_token, Spree.t(:iugu_api_token) + ': ') + tag(:br) %>
               <%= text_field_tag :iugu_api_token, @config.iugu_api_token, class: 'form-control' %>
+            </div>
+            <div class="col-sm-4">
+              <%= label_tag(:days_to_due_date, Spree.t(:days_to_due_date) + ': ') + tag(:br) %>
+              <%= text_field_tag :days_to_due_date, @config.days_to_due_date, class: 'form-control' %>
+            </div>
+            <div class="col-sm-4">
+              <%= label_tag(:ignore_due_email , Spree.t(:ignore_due_email) + ': ') + tag(:br) %>
+              <%= radio_button_tag :ignore_due_email, true, @config.ignore_due_email %>
+              <%= label_tag(:ignore_due_email_true, Spree.t(:true)) %>
+              <%= radio_button_tag :ignore_due_email, false, @config.ignore_due_email == false %>
+              <%= label_tag(:ignore_due_email_false, Spree.t(:false)) %>
             </div>
           </div>
           <div class="row">

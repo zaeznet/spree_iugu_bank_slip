@@ -8,6 +8,7 @@ describe Spree::BankSlipsController, type: :controller do
 
     it 'should change status to paid' do
       request_params = {
+          bank_slip_id: slip.id,
           data: {
               id: slip.id,
               status: 'paid'
@@ -21,6 +22,7 @@ describe Spree::BankSlipsController, type: :controller do
 
     it 'should change status to canceled' do
       request_params = {
+          bank_slip_id: slip.id,
           data: {
               id: slip.id,
               status: 'canceled'

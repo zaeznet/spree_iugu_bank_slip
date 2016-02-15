@@ -5,6 +5,7 @@ module Spree
     preference :doc_customer_attr, :string                  # Atributo que representa o documento do cliente
     preference :days_to_due_date,  :integer, default: 3     # Dias para a data de vencimento
     preference :ignore_due_email,  :boolean, default: true  # Ignorar email de cobranca
+    preference :log_requests,      :boolean, default: false # Salva no log os parametros enviados e recebidos nas requisicoes
 
   end
 end

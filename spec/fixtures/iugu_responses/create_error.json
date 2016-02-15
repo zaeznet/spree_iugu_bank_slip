@@ -127,5 +127,10 @@
     }
   ],
   "custom_variables": [],
-  "logs": []
+  "logs": [],
+  "errors": {
+    "due_date": [
+      "não pode ser anterior ao dia de hoje"
+    ]
+  }
 }

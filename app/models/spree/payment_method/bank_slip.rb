@@ -94,28 +94,32 @@ module Spree
           }
         end
 
-        response = Iugu::Invoice.create(iugu_params)
+        invoice = Iugu::Invoice.create(iugu_params)
 
-        if response.attributes['errors']
-          ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.iugu_fail'), {}, {})
+        if Spree::BankSlipConfig[:log_requests]
+          logger = Logger.new Rails.root.join('log', "#{Rails.env}.log")
+          logger.debug "Request Iugu: #{iugu_params}"
+          logger.debug "Response Iugu: #{invoice.attributes}" if invoice.respond_to? :attributes
+        end
+
+        if invoice.errors
+          errors = invoice.errors.collect { |k, v| v.collect { |i| "#{k} #{i}" }.join(', ') }.join(', ')
+          ActiveMerchant::Billing::Response.new(false, errors, {}, {})
         else
-          invoice_id = response.attributes['id']
-          invoice = Iugu::Invoice.fetch(invoice_id)
-
-          # Se a fatura for criada, salva as informacoes no objeto BankSlip
           source.amount = amount.to_d / 100
-          source.invoice_id = invoice_id
+          source.invoice_id = invoice.attributes['id']
           source.payment_due = invoice.attributes['due_date']
           source.url = invoice.attributes['secure_url']
           source.pdf = "#{invoice.attributes['secure_url']}.pdf"
 
           if source.save
-            ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_authorized'), {}, authorization: invoice_id)
+            ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_authorized'), {}, authorization: invoice.attributes['id'])
           else
-            ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.source_fail'), {}, authorization: invoice_id)
+            ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.source_fail'), {}, authorization: invoice.attributes['id'])
           end
         end
-
+      rescue
+        ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.iugu_fail'), {}, {})
       end
 
       # Captura o pagamento

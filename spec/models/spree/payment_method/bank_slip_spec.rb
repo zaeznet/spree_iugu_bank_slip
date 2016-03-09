@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::PaymentMethod::BankSlip, type: :model do
 
   let(:object) { create(:slip_payment_method) }
-  let(:slip) { create(:bank_slip) }
+  let!(:slip) { create(:bank_slip) }
 
   before { Iugu.api_key = '' }
 
@@ -43,14 +43,33 @@ describe Spree::PaymentMethod::BankSlip, type: :model do
   it 'capture' do
     object.capture '1599', '1', slip.payment.gateway_options
 
-    expect(slip.reload.paid?).to be true
+    expect(slip.reload.paid?).to be_truthy
     expect(slip.paid_in).to eq Date.today
   end
 
-  it 'void' do
-    object.void '1', slip.payment.gateway_options
+  context 'void' do
+    it 'should void successfully' do
+      object.void '1', slip.payment.gateway_options
+      expect(slip.reload.canceled?).to be_truthy
+    end
 
-    expect(slip.reload.canceled?).to be true
+    it 'should return error when bank slip not found' do
+      response = object.void 10, slip.payment.gateway_options
+      expect(response.success?).to be_falsey
+      expect(slip.reload.canceled?).to be_falsey
+    end
+  end
+
+  context 'cancel' do
+    it 'should cancel successfully' do
+      object.cancel 1
+      expect(slip.reload.canceled?).to be_truthy
+    end
+
+    it 'should return error when bank slip not found' do
+      response = object.cancel 10
+      expect(response.success?).to be_falsey
+    end
   end
 
   def stub_iugu(filename = 'create')

@@ -155,6 +155,21 @@ module Spree
       rescue
         ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.void_fail'), {}, {})
       end
+
+      # Cancela o pagamento
+      #
+      # @author Isabella Santos
+      #
+      # @return [ActiveMerchant::Billing::Response]
+      #
+      def cancel(response_code)
+        bank_slip = Spree::BankSlip.find_by invoice_id: response_code
+        bank_slip.update_attribute(:status, 'canceled')
+
+        ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_voided'), {}, authorization: response_code)
+      rescue
+        ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.void_fail'), {}, {})
+      end
     end
   end
 end

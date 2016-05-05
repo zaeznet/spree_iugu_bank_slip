@@ -21,7 +21,7 @@ FactoryGirl.define do
   factory :slip_payment_without_source, class: Spree::Payment do
     amount 15.99
     association(:payment_method, factory: :slip_payment_method)
-    order
+    association(:order, factory: :completed_order_with_totals)
     state 'checkout'
     response_code '1'
 

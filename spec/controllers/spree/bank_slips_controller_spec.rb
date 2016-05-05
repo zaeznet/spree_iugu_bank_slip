@@ -32,6 +32,7 @@ describe Spree::BankSlipsController, type: :controller do
 
       expect(response.status).to eq 200
       expect(slip.reload.canceled?).to be true
+      expect(slip.order.canceled?).to be true
     end
 
   end

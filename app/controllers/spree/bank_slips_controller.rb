@@ -15,8 +15,10 @@ module Spree
         case params[:data][:status].to_sym
           # Captura o pagamento
           when :paid then @slip.payment.capture!
-          # Cancela o pagamento
-          when :canceled, :expired then @slip.payment.void_transaction!
+          # Cancela o pagamento e o pedido
+          when :canceled, :expired
+            @slip.payment.void_transaction!
+            @slip.order.cancel!
         end
       end
       render nothing: true, status: 200

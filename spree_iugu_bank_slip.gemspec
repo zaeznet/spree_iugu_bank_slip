@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_iugu_bank_slip'
-  s.version     = '3.0.4'
+  s.version     = '3.0.4.1'
   s.summary     = 'Boleto do Iugu como forma de pagamento no Spree Commerce'
   s.description = s.summary
   s.required_ruby_version = '>= 2.0.0'

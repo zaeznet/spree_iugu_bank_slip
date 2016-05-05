@@ -5,7 +5,13 @@ Gem::Specification.new do |s|
   s.version     = '3.0.4.1'
   s.summary     = 'Boleto do Iugu como forma de pagamento no Spree Commerce'
   s.description = s.summary
-  s.required_ruby_version = '>= 2.0.0'
+
+  begin
+    require 'ruby_dep/travis'
+    s.required_ruby_version = RubyDep::Travis.new.version_constraint
+  rescue LoadError
+    abort "Install 'ruby_dep' gem before building this gem"
+  end
 
   s.author    = 'Zaez Team'
   s.email     = 'contato@zaez.net'

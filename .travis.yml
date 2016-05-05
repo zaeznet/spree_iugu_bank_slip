@@ -7,6 +7,6 @@ script:
   - bundle exec rspec
 language: ruby
 rvm:
-  - 2.0.0
-  - 2.1.2
-  - 2.1.5
+  - 2.2.3
+  - 2.2.4
+before_install: gem install ruby_dep -v 1.2.0

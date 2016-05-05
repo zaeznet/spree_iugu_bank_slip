@@ -39,4 +39,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-shell'
   s.add_development_dependency 'http_logger'
+  s.add_development_dependency 'ruby_dep', '~> 1.2'
 end

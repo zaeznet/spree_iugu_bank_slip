@@ -2,16 +2,11 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_iugu_bank_slip'
-  s.version     = '3.0.4.1'
+  s.version     = '3.0.4.2'
   s.summary     = 'Boleto do Iugu como forma de pagamento no Spree Commerce'
   s.description = s.summary
+  s.required_ruby_version = '>= 2.1.0'
 
-  begin
-    require 'ruby_dep/travis'
-    s.required_ruby_version = RubyDep::Travis.new.version_constraint
-  rescue LoadError
-    abort "Install 'ruby_dep' gem before building this gem"
-  end
 
   s.author    = 'Zaez Team'
   s.email     = 'contato@zaez.net'
@@ -45,5 +40,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-shell'
   s.add_development_dependency 'http_logger'
-  s.add_development_dependency 'ruby_dep', '~> 1.2'
 end

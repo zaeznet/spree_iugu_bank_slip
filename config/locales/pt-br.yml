@@ -18,6 +18,7 @@ pt-BR:
     paid_in: Pago Em
     invoice_id: "Número Boleto"
     generate_bank_slip: Gerar boleto
+    store_url: URL da loja
     bank_slip:
       messages:
         iugu_fail: "Requisição falhou!"

@@ -31,11 +31,15 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <%= label_tag(:doc_customer_attr, Spree.t(:doc_customer_attr) + ': ') + tag(:br) %>
               <%= select_tag :doc_customer_attr,
                              options_for_select(@user_attr.collect { |item| [Spree.t(item), item] }, @config.doc_customer_attr),
                              class: 'select2', include_blank: true %>
+            </div>
+            <div class="col-sm-6">
+              <%= label_tag(:store_url, Spree.t(:store_url) + ': ') + tag(:br) %>
+              <%= text_field_tag :store_url, @config.store_url, class: 'form-control' %>
             </div>
           </div>
         </div>

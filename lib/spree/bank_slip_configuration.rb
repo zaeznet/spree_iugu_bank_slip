@@ -6,6 +6,7 @@ module Spree
     preference :days_to_due_date,  :integer, default: 3     # Dias para a data de vencimento
     preference :ignore_due_email,  :boolean, default: true  # Ignorar email de cobranca
     preference :log_requests,      :boolean, default: false # Salva no log os parametros enviados e recebidos nas requisicoes
+    preference :store_url,         :string,  default: ''    # URL da loja para a montagem da url de retorno
 
   end
 end

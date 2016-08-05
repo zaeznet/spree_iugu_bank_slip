@@ -40,7 +40,7 @@ module Spree
           phone = billing_address[:phone]
         end
 
-        notification_url = Spree::Store.current.url
+        notification_url = Spree::BankSlipConfig[:store_url]
         notification_url << Spree::Core::Engine.routes.url_helpers.bank_slip_status_changed_path(source.id)
 
         due_date = Date.today + Spree::BankSlipConfig[:days_to_due_date].days
@@ -147,8 +147,16 @@ module Spree
       #
       # @return [ActiveMerchant::Billing::Response]
       #
-      def void(response_code, gateway_options)
+      def void(response_code, _gateway_options)
         bank_slip = Spree::BankSlip.find_by invoice_id: response_code
+        return ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.void_fail'), {}, {}) if bank_slip.nil?
+
+        # Verifica na Iugu se o boleto esta pendente
+        # se tiver, faz o cancelamento
+        invoice = Iugu::Invoice.fetch response_code
+        if invoice.status == 'pending'
+          invoice.cancel
+        end
         bank_slip.update_attribute(:status, 'canceled')
 
         ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_voided'), {}, authorization: response_code)
@@ -164,6 +172,14 @@ module Spree
       #
       def cancel(response_code)
         bank_slip = Spree::BankSlip.find_by invoice_id: response_code
+        return ActiveMerchant::Billing::Response.new(false, Spree.t('bank_slip.messages.void_fail'), {}, {}) if bank_slip.nil?
+
+        # Verifica na Iugu se o boleto esta pendente
+        # se tiver, faz o cancelamento
+        invoice = Iugu::Invoice.fetch response_code
+        if invoice.status == 'pending'
+          invoice.cancel
+        end
         bank_slip.update_attribute(:status, 'canceled')
 
         ActiveMerchant::Billing::Response.new(true, Spree.t('bank_slip.messages.successfully_voided'), {}, authorization: response_code)

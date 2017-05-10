@@ -18,7 +18,9 @@ module Spree
           # Cancela o pagamento e o pedido
           when :canceled, :expired
             @slip.payment.void_transaction!
-            @slip.order.cancel!
+            # Pode ser que o pedido tenha sido completo por outro pagamento
+            # esse e o motivo dessa verificacao
+            @slip.order.cancel! if @slip.order.payment_state == 'balance_due'
         end
       end
       render nothing: true, status: 200
